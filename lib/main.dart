@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'; 
-import 'src/pages/home_temp.dart';
+import 'package:components/src/routes/routes.dart';
+import 'package:components/src/pages/not_found_page.dart';
 void main() => runApp(MyApp());
  
 class MyApp extends StatelessWidget {
@@ -8,13 +9,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: Scaffold(        
-        appBar: AppBar(
-          title: Text('App Componentes'),
-          centerTitle: true,
-        ),
-        body: HomePageTemp(),
-      ),
+      // home: HomePage(),
+      initialRoute: '/',
+      routes: getAppRoutes(),
+      onGenerateRoute: (settings) {
+        print('Ruta llamada $settings');
+        return MaterialPageRoute(builder: ( BuildContext context) => NotFoundPage());
+      },
     );
   }
 }
