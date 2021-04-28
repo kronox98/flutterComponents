@@ -9,6 +9,10 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   String _nombre = '';
+  // String _email = '';
+  // String _fecha = '';
+  List<String> _poderes = ['Volar', 'Rayos x', 'Super fuerza'];
+  String _optionSelected = 'Volar';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +24,9 @@ class _InputPageState extends State<InputPage> {
          children: [
            _createInput(),
            Divider(),
-           _createPerson()
+           _createPerson(),
+           Divider(),
+           _createDropdown()
          ],
        ),
     );
@@ -54,6 +60,30 @@ class _InputPageState extends State<InputPage> {
 
     return ListTile(
       title: Text('Nombre es: $_nombre')
+    );
+  }
+
+  List<DropdownMenuItem<String>> getOptionsDropdown() {
+    List<DropdownMenuItem<String>> list = [];
+    _poderes.forEach((poder) {
+      list.add( DropdownMenuItem(
+        value: poder,
+        child: Text(poder)
+      ));
+    });
+    return list;
+  }
+
+  Widget _createDropdown() {
+    return DropdownButton(
+      items: getOptionsDropdown(),
+      value: _optionSelected,
+      onChanged: (value) {
+        print(value);
+        setState(() {
+          _optionSelected = value;
+        });
+      },
     );
   }
 }
